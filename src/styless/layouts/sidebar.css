@@ -1,0 +1,86 @@
+/* src/styless/layouts/sidebar.css */
+
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background: rgba(18, 18, 18, 0.8); /* Fondo oscuro con transparencia */
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sección del Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.logo-box {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #ff4d8d, #ff8c61); /* Gradiente Rosie */
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: white;
+  font-size: 1rem;
+}
+
+.logo h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+/* Título de sección (RECENTS) */
+.recent-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+  padding-left: 8px;
+}
+
+/* Ítems de Navegación */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-item {
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.nav-item.active {
+  background: rgba(255, 77, 141, 0.1); /* Tinte rosado sutil */
+  color: #ff4d8d;
+  font-weight: 600;
+}
+.layout {
+  display: flex; /* Esto pone el Sidebar y el Login uno al lado del otro */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Evita scrolls innecesarios en el login */
+  background-color: var(--rosie-bg);
+}

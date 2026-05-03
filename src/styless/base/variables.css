@@ -1,0 +1,24 @@
+:root {
+  /* Paleta Rosie - Aesthetic Dark */
+  --rosie-bg:         #0d050a;
+  --rosie-surface:    #150a12;
+  --rosie-card:       #1a0e17;
+  --rosie-card-alt:   #1f1220;
+  --rosie-border:     rgba(255, 77, 141, 0.2);
+  --rosie-border-hi:  rgba(255, 77, 141, 0.4);
+  --rosie-pink:       #FF4D8D;
+  --rosie-pink-soft:  #FF80B0;
+  --rosie-coral:      #FF8C61;
+  --rosie-glow:       rgba(255, 77, 141, 0.2);
+  --rosie-text:       #f5eef2;
+  --rosie-muted:      #a08aa0;
+  --rosie-input-bg:   #110811;
+  
+  /* Gradientes */
+  --rosie-gradient:   linear-gradient(135deg, #FF4D8D 0%, #FF8C61 100%);
+  --rosie-gradient-subtle: linear-gradient(135deg, rgba(255,77,141,0.08) 0%, rgba(255,140,97,0.04) 100%);
+  
+  /* Sombras y Efectos */
+  --rosie-shadow-lg: 0 24px 80px rgba(0,0,0,0.45);
+  --rosie-glow-shadow: 0 0 160px rgba(255,77,141,0.07);
+}
