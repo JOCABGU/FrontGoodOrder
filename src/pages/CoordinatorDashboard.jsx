@@ -23,6 +23,7 @@ import "../styless/pages/coordinator.css";
 
 const sections = [
   ["resumen", "Resumen"],
+  ["malla", "Malla por semestre"],
   ["catalogo", "Catalogo"],
   ["planificador", "Planificador"],
   ["cohorte", "Cohorte"],
@@ -119,6 +120,21 @@ export default function CoordinatorDashboard() {
     if (!filter.id_semestre) return [];
     return modulos.filter((m) => Number(m.id_semestre) === Number(filter.id_semestre));
   }, [filter.id_semestre, modulos]);
+
+  const materiaDocenteMap = useMemo(() => {
+    const map = new Map();
+    docenteMaterias.forEach((dm) => {
+      if (!map.has(dm.id_materia)) {
+        map.set(dm.id_materia, dm.docente?.nombre || null);
+      }
+    });
+    return map;
+  }, [docenteMaterias]);
+
+  const mallaMaterias = useMemo(() => {
+    if (!filter.id_semestre) return [];
+    return materias.filter((m) => Number(m.id_semestre) === Number(filter.id_semestre));
+  }, [filter.id_semestre, materias]);
 
   const agenda = useMemo(() => {
     if (!agendaEstudiante) return [];
@@ -253,6 +269,54 @@ export default function CoordinatorDashboard() {
             <article className="go-card"><h4>Docentes</h4><p>{docentes.length}</p></article>
             <article className="go-card"><h4>Inscripciones</h4><p>{inscripciones.length}</p></article>
           </div>
+        ) : null}
+
+        {active === "malla" ? (
+          <section className="go-card">
+            <h4>Malla por semestre</h4>
+            <div className="go-grid-2">
+              <select value={filter.id_semestre} onChange={(e) => setFilter((p) => ({ ...p, id_semestre: e.target.value }))}>
+                <option value="">Filtrar por semestre</option>
+                {semestres.map((s) => <option key={s.id_semestre} value={s.id_semestre}>{s.nombre}</option>)}
+              </select>
+              <select value={filter.id_carrera} onChange={(e) => setFilter((p) => ({ ...p, id_carrera: e.target.value }))}>
+                <option value="">Filtrar por carrera</option>
+                {carreras.map((c) => <option key={c.id_carrera} value={c.id_carrera}>{c.nombre}</option>)}
+              </select>
+            </div>
+
+            {!filter.id_semestre ? (
+              <p className="go-muted-block">Selecciona un semestre para ver materias.</p>
+            ) : (
+              <div className="go-malla-grid">
+                {mallaMaterias
+                  .filter((m) => !filter.id_carrera || Number(m.id_carrera) === Number(filter.id_carrera))
+                  .map((m) => {
+                    const docente = materiaDocenteMap.get(m.id_materia);
+                    const sinDocente = !docente;
+                    return (
+                      <button
+                        key={m.id_materia}
+                        type="button"
+                        className={`go-malla-card ${sinDocente ? "pending" : "ok"}`}
+                        onClick={() => {
+                          setFilter((p) => ({ ...p, id_materia: String(m.id_materia) }));
+                          if (sinDocente) {
+                            setActive("planificador");
+                            setFeedback(`La materia ${m.nombre} no tiene docente. Te llevamos a Planificador.`);
+                          }
+                        }}
+                      >
+                        {sinDocente ? <span className="go-dot" /> : null}
+                        <h5>{m.nombre}</h5>
+                        <p>{sinDocente ? "Sin docente" : docente}</p>
+                      </button>
+                    );
+                  })}
+                {mallaMaterias.length === 0 ? <p className="go-muted-block">No hay materias para ese semestre.</p> : null}
+              </div>
+            )}
+          </section>
         ) : null}
 
         {active === "catalogo" ? (

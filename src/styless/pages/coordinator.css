@@ -226,6 +226,48 @@
   color: var(--go-muted);
 }
 
+.go-malla-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.go-malla-card {
+  position: relative;
+  text-align: left;
+  border: 1px solid var(--go-border);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  color: var(--go-text);
+  padding: 12px;
+  cursor: pointer;
+}
+
+.go-malla-card h5 {
+  margin: 0 0 8px;
+}
+
+.go-malla-card p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.go-malla-card.pending {
+  border-color: #ff6b93;
+}
+
+.go-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff3a62;
+  box-shadow: 0 0 10px rgba(255, 58, 98, 0.8);
+}
+
 @media (max-width: 980px) {
   .go-layout { grid-template-columns: 1fr; }
   .go-sidebar { border-right: 0; border-bottom: 1px solid var(--go-border); }
